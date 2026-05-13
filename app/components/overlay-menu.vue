@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const isOpen = ref(false)
 
+provide('overlayOpen', isOpen)
+
 const links = [
   { label: 'Home', to: '/' },
   { label: 'Projects', to: '/projects' },
@@ -9,7 +11,8 @@ const links = [
 ]
 
 const route = useRoute()
-watch(() => route.path, () => { isOpen.value = false })
+
+if (['/contact', '/projects'].includes(route.path)) {isOpen.value = true}
 </script>
 
 <template>
@@ -21,6 +24,9 @@ watch(() => route.path, () => { isOpen.value = false })
         <nav class="menu-nav">
           <NuxtLink v-for="link in links" :key="link.to" :to="link.to" class="menu-link">{{ link.label }}</NuxtLink>
         </nav>
+        <div class="menu-page-content">
+          <slot />
+        </div>
       </div>
     </Transition>
   </div>

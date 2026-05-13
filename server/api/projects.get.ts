@@ -8,5 +8,12 @@ const client = createClient({
 })
 
 export default defineEventHandler(async () => {
-  return await client.fetch('*[_type == "project"]{ name, description }')
+  return await client.fetch(`*[_type == "project"]{
+    title,
+    description,
+    year,
+    address,
+    "mainImage": mainImage.asset->url,
+    "images": images[].asset->url
+  }`)
 })

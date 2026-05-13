@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import { PortableText } from '@portabletext/vue'
+
+const { data: settings } = await useFetch('/api/settings')
+</script>
+
 <template>
-  <div>
-    <h1>Contact</h1>
-    <p>Get in touch with us at hello@example.com</p>
+  <div class="contact-page">
+    <PortableText :value="settings.contactInfo" />
+
   </div>
 </template>
 

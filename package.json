@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxtjs/sanity": "^2.3.0",
+    "@portabletext/vue": "^1.0.14",
     "@sanity/client": "^7.22.0",
     "lucide-vue-next": "^1.0.0",
     "nuxt": "^4.4.4",

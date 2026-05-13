@@ -4,10 +4,8 @@ const isOpen = ref(false)
 provide('overlayOpen', isOpen)
 
 const links = [
-  { label: 'Home', to: '/' },
   { label: 'Projects', to: '/projects' },
   { label: 'Contact', to: '/contact' },
-  { label: 'Studio', to: '/studio' },
 ]
 
 const route = useRoute()
@@ -17,7 +15,7 @@ if (['/contact', '/projects'].includes(route.path)) {isOpen.value = true}
 
 <template>
   <div class="overlay-menu">
-    <button class="menu-trigger" :class="{ active: isOpen }" @click="isOpen = !isOpen">John SLick</button>
+    <button class="menu-trigger" :class="{ active: isOpen }" @click="isOpen = !isOpen">John Slick</button>
 
     <Transition name="overlay">
       <div v-if="isOpen" class="menu-overlay">

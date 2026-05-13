@@ -1,0 +1,15 @@
+nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+
+  a {
+    color: $color-primary;
+    font-weight: 500;
+
+    &.router-link-active {
+      text-decoration: underline;
+    }
+  }
+}

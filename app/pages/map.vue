@@ -5,7 +5,9 @@ import { Protocol } from 'pmtiles'
 
 definePageMeta({ layout: 'map' })
 
+const route = useRoute()
 const mapContainer = ref<HTMLElement>()
+const selectedBuilding = ref<{ name: string; description: string; fillColor: string } | null>(null)
 
 onMounted(() => {
   if (!mapContainer.value) return
@@ -106,7 +108,7 @@ onMounted(() => {
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }))
 
   map.on('load', async () => {
-    const res = await fetch('/maps/buildings.json')
+    const res = await fetch('/api/map-buildings')
     const buildings = await res.json()
 
     map.addSource('buildings-overlay', {
@@ -117,28 +119,42 @@ onMounted(() => {
       id: 'buildings-overlay-fill',
       type: 'fill',
       source: 'buildings-overlay',
-      paint: { 'fill-color': '#e74c3c', 'fill-opacity': 0.6 },
+      paint: { 'fill-color': ['get', 'fillColor'], 'fill-opacity': 1 },
     })
     map.addLayer({
       id: 'buildings-overlay-outline',
       type: 'line',
       source: 'buildings-overlay',
-      paint: { 'line-color': '#c0392b', 'line-width': 2 },
+      paint: { 'line-color': '#000000', 'line-width': 1 },
     })
 
     map.on('click', 'buildings-overlay-fill', (e) => {
       if (!e.features?.length) return
       const props = e.features[0].properties
-      new maplibregl.Popup().setLngLat(e.lngLat).setHTML(`<strong>${props.name}</strong>`).addTo(map)
+      selectedBuilding.value = { name: props.name, description: props.description || '', fillColor: props.fillColor || '#e74c3c' }
     })
     map.on('mouseenter', 'buildings-overlay-fill', () => { map.getCanvas().style.cursor = 'pointer' })
     map.on('mouseleave', 'buildings-overlay-fill', () => { map.getCanvas().style.cursor = '' })
+
+    if ('copy' in route.query) {
+      map.on('click', 'building', (e) => {
+        if (!e.features?.length) return
+        const feature = e.features[0]
+        if (feature.geometry.type === 'Polygon') {
+          const coords = (feature.geometry as GeoJSON.Polygon).coordinates[0]
+          console.log('polygonJson (paste into Sanity):', JSON.stringify(coords))
+        }
+      })
+      map.on('mouseenter', 'building', () => { map.getCanvas().style.cursor = 'crosshair' })
+      map.on('mouseleave', 'building', () => { map.getCanvas().style.cursor = '' })
+    }
   })
 })
 </script>
 
 <template>
   <div ref="mapContainer" class="map-container"></div>
+  <BuildingDetail :building="selectedBuilding" @close="selectedBuilding = null" />
 </template>
 
 <style scoped>

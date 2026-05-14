@@ -80,6 +80,27 @@
   line-height: 1.5;
 }
 
+.building-detail__main-image {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  object-fit: cover;
+}
+
+.building-detail__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.building-detail__gallery-image {
+  width: calc(50% - 4px);
+  border-radius: 4px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.3s ease;

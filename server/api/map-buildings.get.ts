@@ -12,6 +12,8 @@ export default defineEventHandler(async () => {
     title,
     description,
     fillColor,
+    "mainImage": mainImage.asset->url,
+    "images": images[].asset->url,
     polygonJson
   }`)
 
@@ -25,6 +27,8 @@ export default defineEventHandler(async () => {
           name: b.title,
           description: b.description || '',
           fillColor: b.fillColor || '#e74c3c',
+          mainImage: b.mainImage || '',
+          images: JSON.stringify(b.images || []),
         },
         geometry: {
           type: 'Polygon',

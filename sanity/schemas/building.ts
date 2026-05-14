@@ -23,6 +23,18 @@ export default defineType({
       initialValue: '#e74c3c',
     }),
     defineField({
+      name: 'mainImage',
+      title: 'Main Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'images',
+      title: 'Gallery',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+    }),
+    defineField({
       name: 'polygonJson',
       title: 'Polygon Coordinates (JSON)',
       type: 'text',

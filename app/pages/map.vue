@@ -7,7 +7,7 @@ definePageMeta({ layout: 'map' })
 
 const route = useRoute()
 const mapContainer = ref<HTMLElement>()
-const selectedBuilding = ref<{ name: string; description: string; fillColor: string } | null>(null)
+const selectedBuilding = ref<{ name: string; description: string; fillColor: string; mainImage: string; images: string[] } | null>(null)
 
 onMounted(() => {
   if (!mapContainer.value) return
@@ -131,7 +131,7 @@ onMounted(() => {
     map.on('click', 'buildings-overlay-fill', (e) => {
       if (!e.features?.length) return
       const props = e.features[0].properties
-      selectedBuilding.value = { name: props.name, description: props.description || '', fillColor: props.fillColor || '#e74c3c' }
+      selectedBuilding.value = { name: props.name, description: props.description || '', fillColor: props.fillColor || '#e74c3c', mainImage: props.mainImage || '', images: JSON.parse(props.images || '[]') }
     })
     map.on('mouseenter', 'buildings-overlay-fill', () => { map.getCanvas().style.cursor = 'pointer' })
     map.on('mouseleave', 'buildings-overlay-fill', () => { map.getCanvas().style.cursor = '' })

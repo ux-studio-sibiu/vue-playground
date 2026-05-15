@@ -2,14 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  routeRules: {
-    '/**': {
-      headers: {
-        'X-Frame-Options': '',
-        'Content-Security-Policy': 'frame-ancestors *',
-      },
-    },
-  },
   app: {
     head: {
       link: [

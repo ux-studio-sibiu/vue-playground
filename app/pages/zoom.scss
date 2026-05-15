@@ -121,7 +121,21 @@
 
 }
 
-
+.flip-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: #000000;
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  word-spacing: 10px;
+  text-transform: uppercase;
+  pointer-events: none;
+  white-space: nowrap;
+}
 
 // ─── Back button ───────────────────────────────
 :global(.zoom-back-btn) {

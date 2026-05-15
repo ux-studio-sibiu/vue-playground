@@ -154,15 +154,15 @@ onMounted(async () => {
           
           <div class="zoom-card zoom-target" data-idx="3"><span class="zoom-card-num">5</span><img :src="bk14" alt="Urban Loft" class="zoom-card-img" /><span class="zoom-card-caption"><em>04</em> Urban Loft</span></div>
           <div class="zoom-card zoom-target" data-idx="4"><span class="zoom-card-num">1</span><img :src="bk9" alt="The Canopy" class="zoom-card-img" /><span class="zoom-card-caption"><em>05</em> The Canopy</span></div>
-          <div class="zoom-card zoom-target" data-idx="5"><span class="zoom-card-num">9</span><img :src="bk12" alt="Stone Chapel" class="zoom-card-img" /><span class="zoom-card-caption"><em>06</em> Stone Chapel</span></div>
+          <div class="zoom-card zoom-target flip" data-idx="5"><span class="zoom-card-num">9</span><img :src="bk12" alt="Stone Chapel" class="zoom-card-img" /><span class="flip-text">UPSIDE DOWN</span><span class="zoom-card-caption hidden"><em>06</em> Stone Chapel</span></div>
           
           <div class="zoom-card zoom-card-pair">
-            <div class="zoom-target flip" data-idx="6"><span class="zoom-card-num">4</span><img :src="bk10" alt="Interior Study" class="zoom-card-img" /><span class="zoom-card-caption"><em>07</em> Interior Study</span></div>
-            <div class="zoom-target flip" data-idx="7"><span class="zoom-card-num">6</span><img :src="bk7" alt="Material Study" class="zoom-card-img" /><span class="zoom-card-caption"><em>08</em> Material Study</span></div>
+            <div class="zoom-target" data-idx="6"><span class="zoom-card-num">4</span><img :src="bk10" alt="Interior Study" class="zoom-card-img" /><span class="zoom-card-caption"><em>07</em> Interior Study</span></div>
+            <div class="zoom-target" data-idx="7"><span class="zoom-card-num">6</span><img :src="bk7" alt="Material Study" class="zoom-card-img" /><span class="zoom-card-caption"><em>08</em> Material Study</span></div>
           </div>
 
-          <div class="zoom-card zoom-target flip" data-idx="8"><span class="zoom-card-num">8</span><img :src="bk11" alt="Facade Detail" class="zoom-card-img" /><span class="zoom-card-caption"><em>09</em> Facade Detail</span></div>
-          <div class="zoom-card zoom-target flip" data-idx="9"><span class="zoom-card-num">2</span><img :src="bk2" alt="Site Context" class="zoom-card-img" /><span class="zoom-card-caption"><em>10</em> Site Context</span></div>
+          <div class="zoom-card zoom-target" data-idx="8"><span class="zoom-card-num">8</span><img :src="bk11" alt="Facade Detail" class="zoom-card-img" /><span class="zoom-card-caption"><em>09</em> Facade Detail</span></div>
+          <div class="zoom-card zoom-target" data-idx="9"><span class="zoom-card-num">2</span><img :src="bk2" alt="Site Context" class="zoom-card-img" /><span class="zoom-card-caption"><em>10</em> Site Context</span></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,209 @@
+// ─── Base ──────────────────────────────────────
+.gsap-page {
+  background: #0a0a0a;
+  color: #f5f0eb;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+// ─── Hero: staggered line reveal ───────────────
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-subtitle {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+// ─── Manifesto: fade in on scroll ──────────────
+.manifesto {
+  padding: 12vh 8vw;
+  max-width: 800px;
+}
+
+.manifesto-text {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  line-height: 1.5;
+  font-weight: 300;
+  color: #c8c0b8;
+}
+
+// ─── Projects: parallax images ─────────────────
+.projects {
+  padding: 8vh 8vw;
+  display: flex;
+  flex-direction: column;
+  gap: 12vh;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw;
+  align-items: center;
+
+  &:nth-child(even) {
+    direction: rtl;
+    > * { direction: ltr; }
+  }
+}
+
+.project-card-img-wrapper {
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 4 / 3;
+}
+
+.project-card-img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+
+.project-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-card-year {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+}
+
+.project-card-title {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.project-card-location {
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+// ─── Ticker: pinned horizontal scroll ──────────
+.ticker {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.ticker-word {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  opacity: 0.08;
+  flex-shrink: 0;
+}
+
+// ─── Stats: counter animation ──────────────────
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 8vw;
+  padding: 16vh 8vw;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-number {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+}
+
+// ─── Footer CTA: scale reveal ──────────────────
+.footer-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 8vh 8vw;
+}
+
+.footer-cta-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.footer-cta-button {
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+  color: #f5f0eb;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: background 0.3s, color 0.3s;
+
+  &:hover {
+    background: #f5f0eb;
+    color: #0a0a0a;
+  }
+}
+
+// ─── Mobile ────────────────────────────────────
+@media (max-width: 768px) {
+  .project-card {
+    grid-template-columns: 1fr;
+    &:nth-child(even) { direction: ltr; }
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 4vh;
+  }
+}

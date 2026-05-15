@@ -67,7 +67,7 @@ export const baseLayers: LayerSpecification[] = [
     type: 'line',
     source: 'sibiu',
     'source-layer': 'building',
-    paint: { 'line-color': '#000000', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.5, 16, 3] },
+    paint: { 'line-color': '#000000', 'line-width': ['interpolate', ['linear'], ['zoom'], 15, 1, 16, 2, 17, 3, 18, 4] },
   },
 ]
 

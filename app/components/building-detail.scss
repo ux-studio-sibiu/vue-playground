@@ -144,15 +144,11 @@
   cursor: pointer;
 }
 
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease;
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
-.slide-enter-active .building-detail-panel,
-.slide-leave-active .building-detail-panel {
-  transition: transform 0.3s ease;
-}
-.slide-enter-from .building-detail-panel,
-.slide-leave-to .building-detail-panel {
-  transform: translateX(100%);
+
+.building-detail-panel {
+  animation: slide-in 0.3s ease;
 }

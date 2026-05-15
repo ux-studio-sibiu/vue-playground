@@ -1,0 +1,32 @@
+.map-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.zoom-display {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: monospace;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.geo-warning {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  z-index: 20;
+  white-space: nowrap;
+}

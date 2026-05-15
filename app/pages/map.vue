@@ -7,9 +7,11 @@ import { baseLayers, overlayLayers } from '~/lib/map-layers'
 definePageMeta({ layout: 'map' })
 
 const route = useRoute()
+const isDev = import.meta.dev
 const mapContainer = ref<HTMLElement>()
 const selectedBuilding = ref<{ name: string; fillColor: string; mainImage: string; content: { description?: string; images?: string[] }[]; polygonJson?: string } | null>(null)
 const zoomLevel = ref(16)
+const geoWarning = ref(false)
 
 onMounted(() => {
   if (!mapContainer.value) return
@@ -35,7 +37,12 @@ onMounted(() => {
     maxBounds: [[24.135, 45.79], [24.17, 45.806]],
   })
 
-  map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }))
+  const geolocate = new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true })
+  map.addControl(geolocate)
+  geolocate.on('geolocate', (e: GeolocationPosition) => {
+    const { longitude, latitude } = e.coords
+    geoWarning.value = longitude < 24.135 || longitude > 24.17 || latitude < 45.79 || latitude > 45.806
+  })
   map.on('zoom', () => { zoomLevel.value = Math.round(map.getZoom() * 10) / 10 })
 
   map.on('load', async () => {
@@ -75,27 +82,9 @@ onMounted(() => {
 <template>
   <div ref="mapContainer" class="map-container"></div>
   <div class="zoom-display">{{ zoomLevel }}</div>
+  <div v-if="geoWarning" class="geo-warning">Nu ești în zona centrului Sibiului</div>
   <BuildingDetail :building="selectedBuilding" @close="selectedBuilding = null" />
-  <MapIntro />
+  <MapIntro v-if="!isDev" />
 </template>
 
-<style scoped>
-.map-container {
-  width: 100vw;
-    height: 100vh;
-}
-
-.zoom-display {
-  position: fixed;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-family: monospace;
-  z-index: 5;
-  pointer-events: none;
-}
-</style>
+<style scoped src="./map.scss"></style>

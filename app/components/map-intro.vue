@@ -5,7 +5,7 @@ const visible = ref(true)
 <template>
   <Transition name="map-intro">
     <div v-if="visible" class="map-intro">
-      <h1 class="map-intro-title">SIBIU: arhitectura<br>la pas</h1>
+      <h1 class="map-intro-title">SIBIU:<br> arhitectura<br>la pas</h1>
       <!-- <p class="map-intro-subtitle">Descoperă clădirile istorice ale orașului</p> -->
       <button class="map-intro-start" @click="visible = false">Start</button>
     </div>

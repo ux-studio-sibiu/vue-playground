@@ -1,0 +1,55 @@
+.map-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.map-intro-title {
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0  12px;
+  margin-bottom:50px;
+}
+
+.map-intro-subtitle {
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 0 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.map-intro-start {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.map-intro-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.map-intro-leave-to {
+  opacity: 0;
+}

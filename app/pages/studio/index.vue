@@ -5,6 +5,6 @@ useHead({ title: 'Sanity Studio' })
 
 <template>
   <ClientOnly>
-    <SanityStudio />
+    <SanityStudio :key="$route.fullPath" />
   </ClientOnly>
 </template>

@@ -7,13 +7,18 @@
   z-index: 10;
   pointer-events: none;
   transition: transform 0.3s ease;
+  max-width: calc(100% - 40px);
 }
 
 .building-detail--collapsed {
-  transform: translateX(calc(100% - 32px));
+  transform: translateX(calc(100% - 12px));
 }
 
-.building-detail__toggle {
+.building-detail-info {
+  padding: 24px;
+}
+
+.building-detail-toggle {
   pointer-events: auto;
   position: absolute;
   top: 50%;
@@ -21,46 +26,47 @@
   transform: translateY(-50%);
   width: 32px;
   height: 48px;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: #000000;
+//   border: 1px solid #ddd;
   border-right: none;
-  border-radius: 6px 0 0 6px;
+//   border-radius: 6px 0 0 6px;
   cursor: pointer;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
-  color: #333;
+  color: #ffffff;
+  z-index: 10;
 }
 
-.building-detail__panel {
+.building-detail-panel {
   pointer-events: auto;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  width: 360px;
-  max-width: 100vw;
+  width: 100%;
   background: #fff;
   box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
-  padding: 24px;
   overflow-y: auto;
 }
 
-.building-detail__close {
+.building-detail-close {
   position: absolute;
   top: 12px;
   right: 16px;
-  background: none;
+  width:36px;
+  height:36px;
+  background: #000000;
   border: none;
   font-size: 28px;
   cursor: pointer;
   line-height: 1;
-  color: #333;
+  color: #ffffff;
 }
 
-.building-detail__color {
+.building-detail-color {
   width: 40px;
   height: 40px;
   border-radius: 6px;
@@ -68,48 +74,85 @@
   margin-bottom: 16px;
 }
 
-.building-detail__title {
+.building-detail-title {
   margin: 0 0 12px;
   font-size: 22px;
   font-weight: 600;
 }
 
-.building-detail__description {
+.building-detail-description {
   margin: 0;
   color: #555;
   line-height: 1.5;
 }
 
-.building-detail__main-image {
+.building-detail-block + .building-detail-block {
+  margin-top: 20px;
+}
+
+.building-detail-main-image {
   width: 100%;
-  border-radius: 6px;
   margin-bottom: 16px;
   object-fit: cover;
 }
 
-.building-detail__gallery {
+.building-detail-gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
-.building-detail__gallery-image {
-  width: calc(50% - 4px);
-  border-radius: 4px;
+.building-detail-gallery-image {
+ width:100%;
   object-fit: cover;
-  aspect-ratio: 4/3;
+//   aspect-ratio: 4/3;
+}
+
+.building-detail-coords {
+  margin-top: 16px;
+}
+
+.building-detail-coords-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #333;
+}
+
+.building-detail-coords-pre {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0 0 8px;
+}
+
+.building-detail-coords-copy {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.3s ease;
 }
-.slide-enter-active .building-detail__panel,
-.slide-leave-active .building-detail__panel {
+.slide-enter-active .building-detail-panel,
+.slide-leave-active .building-detail-panel {
   transition: transform 0.3s ease;
 }
-.slide-enter-from .building-detail__panel,
-.slide-leave-to .building-detail__panel {
+.slide-enter-from .building-detail-panel,
+.slide-leave-to .building-detail-panel {
   transform: translateX(100%);
 }

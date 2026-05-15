@@ -3,8 +3,9 @@ const root = ref<HTMLDivElement | null>(null)
 let dispose: (() => void) | undefined
 
 onMounted(async () => {
+  await nextTick()
   if (root.value) {
-    console.log('Mounting Sanity Studio...')
+    console.log('Mounting Sanity Studio..')
     const { renderStudio } = await import('sanity')
     const { default: config } = await import('~~/sanity.config')
     console.log('Rendering Studio with config:', config)

@@ -12,11 +12,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-    defineField({
       name: 'fillColor',
       title: 'Fill Color',
       type: 'string',
@@ -29,10 +24,37 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: 'images',
-      title: 'Gallery',
+      name: 'content',
+      title: 'Content',
       type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
+      of: [
+        {
+          type: 'object',
+          name: 'contentBlock',
+          title: 'Content Block',
+          fields: [
+
+            defineField({
+              name: 'images',
+              title: 'Images',
+              type: 'array',
+              of: [{ type: 'image', options: { hotspot: true } }],
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+            }),
+            
+          ],
+          preview: {
+            select: { title: 'description' },
+            prepare: ({ title }: { title?: string }) => ({
+              title: title ? title.slice(0, 80) : 'Paragrafe',
+            }),
+          },
+        },
+      ],
     }),
     defineField({
       name: 'polygonJson',

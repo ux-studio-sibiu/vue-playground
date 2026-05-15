@@ -18,6 +18,13 @@ export default defineNuxtConfig({
     apiVersion: '2024-01-01',
     useCdn: true,
   },
+  runtimeConfig: {
+    sanity: {
+      projectId: process.env.NUXT_SANITY_PROJECT_ID,
+      dataset: 'production',
+      apiVersion: '2024-01-01',
+    },
+  },
   css: ['~/assets/css/shadcn.css', '~/assets/scss/global.scss'],
   vite: {
     css: {

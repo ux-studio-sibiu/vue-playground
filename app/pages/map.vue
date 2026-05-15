@@ -120,7 +120,7 @@ onMounted(() => {
   <div class="zoom-display">{{ zoomLevel }}</div>
   <div v-if="geoWarning" class="geo-warning">Nu ești în zona centrului Sibiului</div>
   <BuildingDetail :building="selectedBuilding" @close="closeBuilding" />
-  <MapIntro v-if="!isDev" />
+  <MapIntro v-if="!isDev && !('curated' in route.query)" />
 </template>
 
 <style scoped src="./map.scss"></style>

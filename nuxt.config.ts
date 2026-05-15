@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/**': {
       headers: {
-        'X-Frame-Options': 'ALLOWALL',
+        'X-Frame-Options': '',
         'Content-Security-Policy': 'frame-ancestors *',
       },
     },

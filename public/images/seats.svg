@@ -1,0 +1,28 @@
+<svg width="1077" height="458" viewBox="0 0 1077 458" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1077" height="458" fill="#F5F5F5"/>
+<path id="ship-shape" d="M595 456H585L2 292V288.5H92.5V277.5H187V179H92.5V169.5H2V165L585 2H595L727.5 134.5V160H804.5V185L1059 190L1074.5 208V250L1059 266.5L804.5 272.5V298.5H721L727.5 322L595 456Z" fill="#3F3F3F" stroke="black" stroke-width="4"/>
+<path id="seat-area" d="M203.5 179V277.5H227V263.5H246.5V305H539V283H553.5V175.5H539V154.5H246.5V193.5H227V179H203.5Z" fill="white" stroke="black" stroke-width="4"/>
+<path id="aux-area" d="M652 263.5H541V196H586H605L616 203V225H625.5V203L633 196H652V184H679.5V196H771.5V263.5H679.5V277.5H652V263.5Z" fill="white" stroke="black" stroke-width="3"/>
+<path id="walkway" opacity="0.34" d="M553.5 263.5H231.5V193.5H553.5V263.5Z" stroke="black" stroke-width="2"/>
+<rect id="s-1A" x="266" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-1B" x="266" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-1C" x="266" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-2A" x="308" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-2B" x="308" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-2C" x="308" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-3A" x="350" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-3B" x="350" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-3C" x="350" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-4A" x="392" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-4B" x="392" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-4C" x="392" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-5A" x="434" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-5B" x="434" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-5C" x="434" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-6A" x="474" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-7B" x="474" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-7C" x="474" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-8A" x="513" y="164" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-8B" x="513" y="218" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+<rect id="s-8C" x="513" y="274" width="19" height="22" fill="white" stroke="black" stroke-width="3" stroke-linejoin="bevel"/>
+</svg>

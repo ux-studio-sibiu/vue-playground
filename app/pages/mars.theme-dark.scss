@@ -1,0 +1,24 @@
+/*
+ * Dark theme font overrides for the Mars page.
+ * Font: Share Tech Mono — cyberpunk terminal, hacker aesthetic.
+ * Smaller, tighter, monospaced; everything feels like a CLI briefing.
+ */
+
+:global(.dark) .mars-page {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+}
+
+:global(.dark) .mars-page-title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+:global(.dark) .mars-page-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1.9;
+  opacity: 0.85;
+}

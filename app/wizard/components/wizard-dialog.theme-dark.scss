@@ -1,0 +1,17 @@
+/*
+ * Mars theme overrides for WizardDialog.
+ *
+ * Only the parts that differ from base styles in `./wizard-dialog.scss`.
+ * Everything not listed here inherits from base, including tokens that
+ * already retint via `.theme-mars` in `app/assets/css/shadcn.css`.
+ */
+
+// :global(.dark) .wizard-dialog-close {
+//   color: hsl(var(--color-destructive));
+//   opacity: 1;
+
+//   :deep(svg) {
+//     width: 1.5rem;
+//     height: 1.5rem;
+//   }
+// }

@@ -1,0 +1,72 @@
+/*
+ * WizardDialog base styles.
+ *
+ * Layout (flex, gap, sizing) stays as Tailwind utilities in the template.
+ * This file owns *visual identity*: colors, borders, focus rings, icon sizes.
+ *
+ * Token contract: read CSS vars from `app/assets/css/shadcn.css` (--surface-default,
+ * --ring, --text-color-muted, etc.) so base styles already adapt to .dark.
+ *
+ * Theme-specific deviations live in sibling files:
+ *   wizard-dialog.theme-mars.scss
+ *   wizard-dialog.theme-<name>.scss   (add when needed)
+ *
+ * Class naming: flat `wizard-dialog-<part>` (no BEM `&__` nesting) so every
+ * class is greppable across the project.
+ */
+
+
+:global(.wizard-dialog) {
+  min-height: 80vh;
+}
+
+.wizard-dialog-header {
+  border-bottom-color: hsl(var(--divider));
+}
+
+.wizard-dialog-footer {
+  border-top-color: hsl(var(--divider));
+}
+
+.wizard-dialog-sidebar {
+  width: 20rem;
+  border-right-color: hsl(var(--divider));
+}
+
+
+
+
+
+.wizard-dialog-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.wizard-dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--radius) - 0.375rem);
+  color: hsl(var(--text-color-muted));
+  opacity: 0.7;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 1; }
+
+  &:focus {
+    outline: none;
+    box-shadow:
+      0 0 0 2px hsl(var(--surface-default)),
+      0 0 0 4px hsl(var(--ring));
+  }
+
+  // Lucide renders as <svg>; scoped style needs :deep to reach it.
+  :deep(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+

@@ -1,0 +1,18 @@
+.btn-primary {
+  background-color: hsl(var(--surface-strong));
+  color: hsl(var(--text-color-strong));
+
+  &:hover:not(:disabled) {
+    background-color: hsl(var(--surface-strong) / 0.9);
+  }
+}
+
+.btn-default {
+  background-color: hsl(var(--surface-default));
+  color: hsl(var(--text-color-default));
+  border: 1px solid hsl(var(--border));
+
+  &:hover:not(:disabled) {
+    background-color: hsl(var(--surface-secondary));
+  }
+}

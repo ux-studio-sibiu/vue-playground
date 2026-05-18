@@ -1,0 +1,20 @@
+/*
+ * Base (default / light) font styles for the Mars page.
+ * Font: Nunito — friendly, rounded, approachable.
+ */
+
+.mars-page {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+}
+
+.mars-page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mars-page-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}

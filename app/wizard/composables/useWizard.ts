@@ -1,13 +1,6 @@
 import { computed, ref, shallowRef } from 'vue'
 import { findNextStep, findStepById } from '../../../shared/wizard/engine'
-import type {
-  FinalizeResponse,
-  StepValidationResponse,
-  WizardFieldErrors,
-  WizardHistoryEntry,
-  WizardStepDef,
-  WizardStepMeta,
-} from '../../../shared/wizard/types'
+import type { FinalizeResponse, StepValidationResponse, WizardFieldErrors, WizardHistoryEntry, WizardStepDef, WizardStepMeta } from '../../../shared/wizard/types'
 
 function toStepMeta(step: WizardStepDef | null): WizardStepMeta | null {
   if (!step) return null
@@ -27,17 +20,17 @@ function toStepMeta(step: WizardStepDef | null): WizardStepMeta | null {
  * (`steps` param) is the same array the server uses, so engine results stay in sync.
  */
 export function useWizard(steps: WizardStepDef[]) {
-  const history = ref<WizardHistoryEntry[]>([])
+  const submitStepHistory = ref<WizardHistoryEntry[]>([])
   const currentStepId = ref<string | null>(null)
   const errors = ref<WizardFieldErrors | undefined>(undefined)
   const isSubmitting = ref(false)
   const isComplete = ref(false)
   const finalPayload = ref<Record<string, unknown> | null>(null)
 
-  /** state derived from history: stepId → validated values. */
-  const state = computed<Record<string, unknown>>(() => {
+  /** Values derived from submission history: stepId → validated values. */
+  const submittedValues = computed<Record<string, unknown>>(() => {
     const out: Record<string, unknown> = {}
-    for (const h of history.value) out[h.stepId] = h.values
+    for (const h of submitStepHistory.value) out[h.stepId] = h.values
     return out
   })
 
@@ -48,10 +41,10 @@ export function useWizard(steps: WizardStepDef[]) {
   })
 
   /** Pre-fill for the current step (in case user navigated back to a previously filled step). */
-  const values = computed<Record<string, unknown>>(() => {
+  const currentStepValues = computed<Record<string, unknown>>(() => {
     const id = currentStepId.value
     if (!id) return {}
-    return (state.value[id] as Record<string, unknown>) ?? {}
+    return (submittedValues.value[id] as Record<string, unknown>) ?? {}
   })
 
   /**
@@ -64,7 +57,7 @@ export function useWizard(steps: WizardStepDef[]) {
   const allSteps = computed<WizardStepMeta[]>(() => {
     const out: WizardStepMeta[] = []
     for (const step of steps) {
-      if (!step.when || step.when(state.value)) {
+      if (!step.when || step.when(submittedValues.value)) {
         out.push(toStepMeta(step)!)
       }
     }
@@ -72,10 +65,10 @@ export function useWizard(steps: WizardStepDef[]) {
   })
 
   /** Just the visited step ids (for "is this clickable / has user been here" checks). */
-  const historyIds = computed<string[]>(() => history.value.map((h) => h.stepId))
+  const visitedStepIds = computed<string[]>(() => submitStepHistory.value.map((h) => h.stepId))
 
-  function start() {
-    history.value = []
+  function initWizard() {
+    submitStepHistory.value = []
     errors.value = undefined
     isComplete.value = false
     finalPayload.value = null
@@ -83,7 +76,7 @@ export function useWizard(steps: WizardStepDef[]) {
     currentStepId.value = first?.step.id ?? null
   }
 
-  async function submit(stepValues: Record<string, unknown>) {
+  async function submitCurrentStep(stepValues: Record<string, unknown>) {
     const id = currentStepId.value
     if (!id) return { ok: false as const }
     isSubmitting.value = true
@@ -101,16 +94,16 @@ export function useWizard(steps: WizardStepDef[]) {
       }
       // Record/replace history entry for this step. If the user came back and re-submitted,
       // truncate everything after — downstream branches may now differ.
-      const existing = history.value.findIndex((h) => h.stepId === id)
+      const existingIndex = submitStepHistory.value.findIndex((h) => h.stepId === id)
       const entry: WizardHistoryEntry = { stepId: id, values: res.data }
-      if (existing >= 0) {
-        history.value = [...history.value.slice(0, existing), entry]
+      if (existingIndex >= 0) {
+        submitStepHistory.value = [...submitStepHistory.value.slice(0, existingIndex), entry]
       } else {
-        history.value = [...history.value, entry]
+        submitStepHistory.value = [...submitStepHistory.value, entry]
       }
-      // Advance via the engine using the current state.
-      const cursor = findStepById(steps, id)!.index + 1
-      const next = findNextStep(steps, state.value, cursor)
+      // Advance via the engine using the current submitted values.
+      const nextSearchIndex = findStepById(steps, id)!.index + 1
+      const next = findNextStep(steps, submittedValues.value, nextSearchIndex)
       currentStepId.value = next?.step.id ?? null
       if (!next) isComplete.value = true
       return { ok: true as const }
@@ -123,22 +116,22 @@ export function useWizard(steps: WizardStepDef[]) {
     // If we are on the review/complete screen, drop back into the last filled step.
     if (isComplete.value) {
       isComplete.value = false
-      const last = history.value[history.value.length - 1]
+      const last = submitStepHistory.value[submitStepHistory.value.length - 1]
       if (last) currentStepId.value = last.stepId
       errors.value = undefined
       return
     }
     // Otherwise: move to the previous step in the recorded history WITHOUT removing
     // its entry — that way navigation preserves previously entered values for prefill.
-    // History only gets truncated when the user actually re-submits (see `submit`).
+    // History only gets truncated when the user actually re-submits (see `submitCurrentStep`).
     const id = currentStepId.value
     if (!id) return
-    const idx = history.value.findIndex((h) => h.stepId === id)
+    const idx = submitStepHistory.value.findIndex((h) => h.stepId === id)
     if (idx > 0) {
-      currentStepId.value = history.value[idx - 1]!.stepId
-    } else if (idx === -1 && history.value.length > 0) {
+      currentStepId.value = submitStepHistory.value[idx - 1]!.stepId
+    } else if (idx === -1 && submitStepHistory.value.length > 0) {
       // Currently on a step that hasn't been submitted yet — jump to the last filled one.
-      currentStepId.value = history.value[history.value.length - 1]!.stepId
+      currentStepId.value = submitStepHistory.value[submitStepHistory.value.length - 1]!.stepId
     }
     errors.value = undefined
   }
@@ -146,7 +139,7 @@ export function useWizard(steps: WizardStepDef[]) {
   function goto(stepId: string) {
     if (stepId === currentStepId.value) return
     // Only previously visited steps are jumpable.
-    if (!history.value.some((h) => h.stepId === stepId)) return
+    if (!submitStepHistory.value.some((h) => h.stepId === stepId)) return
     // Just move the pointer; keep history (and therefore prefill values) intact.
     // Re-submitting on this step (or any later one) will truncate downstream entries
     // via `submit`'s existing-index logic.
@@ -160,15 +153,15 @@ export function useWizard(steps: WizardStepDef[]) {
     try {
       const res = await $fetch<FinalizeResponse>('/api/wizard/finalize', {
         method: 'POST',
-        body: { history: history.value },
+        body: { history: submitStepHistory.value },
         ignoreResponseError: true,
       })
       if (!res.ok) {
         // Surface the failure: jump to the offending step if the server identified one.
         if (res.stepId) {
-          const idx = history.value.findIndex((h) => h.stepId === res.stepId)
+          const idx = submitStepHistory.value.findIndex((h) => h.stepId === res.stepId)
           if (idx >= 0) {
-            history.value = history.value.slice(0, idx)
+            submitStepHistory.value = submitStepHistory.value.slice(0, idx)
             currentStepId.value = res.stepId
             isComplete.value = false
           }
@@ -187,16 +180,16 @@ export function useWizard(steps: WizardStepDef[]) {
   return {
     // state
     currentStep,
-    values,
+    currentStepValues,
     errors,
-    history: historyIds,
+    visitedStepIds,
     allSteps,
     isComplete,
     isSubmitting,
     finalPayload,
     // actions
-    start,
-    submit,
+    initWizard,
+    submitCurrentStep,
     back,
     goto,
     finalize,

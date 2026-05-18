@@ -1,0 +1,21 @@
+/*
+ * Mars theme overrides for WizardDialog.
+ *
+ * Only the parts that differ from base styles in `./wizard-dialog.scss`.
+ * Everything not listed here inherits from base, including tokens that
+ * already retint via `.theme-mars` in `app/assets/css/shadcn.css`.
+ */
+
+// No component-local overrides for Mars yet.
+// Token retinting (colors, radius, etc.) is handled by .theme-mars in shadcn.css.
+// Add rules here as: :global(.theme-mars) .wizard-dialog-<part> { ... }
+
+// :global(.theme-mars) .wizard-dialog-close {
+//   color: hsl(var(--color-destructive));
+//   opacity: 1;
+
+//   :deep(svg) {
+//     width: 1.5rem;
+//     height: 1.5rem;
+//   }
+// }

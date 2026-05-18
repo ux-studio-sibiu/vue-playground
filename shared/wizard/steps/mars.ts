@@ -6,15 +6,58 @@ import type { WizardStepDef } from '../types'
  * ------------------------------------------------------------------ */
 
 export const identitySchema = z.object({
-  fullName: z
-    .string()
-    .min(2, 'Earth name must be at least 2 characters')
-    .max(80),
-  martianAlias: z
-    .string()
-    .min(3, 'A proper Martian alias is at least 3 characters')
-    .regex(/^[A-Z]/, 'Martian aliases must begin with a capital letter (regulation 7.3.2)'),
+  // TEMP(dev): relaxed validation so we can skip to step 2 quickly. Restore the
+  // strict rules below before merging.
+  fullName: z.string().optional(),
+  martianAlias: z.string().optional(),
+  // fullName: z
+  //   .string()
+  //   .min(2, 'Earth name must be at least 2 characters')
+  //   .max(80),
+  // martianAlias: z
+  //   .string()
+  //   .min(3, 'A proper Martian alias is at least 3 characters')
+  //   .regex(/^[A-Z]/, 'Martian aliases must begin with a capital letter (regulation 7.3.2)'),
 })
+
+export interface SeatDef {
+  /** Seat id, e.g. "3B". */
+  id: string
+  /** SVG x coordinate of the rect. */
+  x: number
+  /** SVG y coordinate of the rect. */
+  y: number
+}
+
+export const SEATS: readonly SeatDef[] = [
+  // Row A (top)
+  { id: '1A', x: 266, y: 164 },
+  { id: '2A', x: 308, y: 164 },
+  { id: '3A', x: 350, y: 164 },
+  { id: '4A', x: 392, y: 164 },
+  { id: '5A', x: 434, y: 164 },
+  { id: '6A', x: 474, y: 164 },
+  { id: '8A', x: 513, y: 164 },
+  // Row B (middle)
+  { id: '1B', x: 266, y: 218 },
+  { id: '2B', x: 308, y: 218 },
+  { id: '3B', x: 350, y: 218 },
+  { id: '4B', x: 392, y: 218 },
+  { id: '5B', x: 434, y: 218 },
+  { id: '7B', x: 474, y: 218 },
+  { id: '8B', x: 513, y: 218 },
+  // Row C (bottom)
+  { id: '1C', x: 266, y: 274 },
+  { id: '2C', x: 308, y: 274 },
+  { id: '3C', x: 350, y: 274 },
+  { id: '4C', x: 392, y: 274 },
+  { id: '5C', x: 434, y: 274 },
+  { id: '7C', x: 474, y: 274 },
+  { id: '8C', x: 513, y: 274 },
+] as const
+
+const SEAT_IDS = SEATS.map((s) => s.id)
+const seatIdSet = new Set(SEAT_IDS)
 
 export const bloodTypeSchema = z.object({
   bloodType: z
@@ -24,6 +67,9 @@ export const bloodTypeSchema = z.object({
     .refine((v) => v === 'O-', {
       message: 'Mars only accepts universal donors. O-negative or stay home.',
     }),
+  seat: z
+    .string({ required_error: 'Pick a seat' })
+    .refine((v) => seatIdSet.has(v), { message: 'Pick a seat from the cabin map' }),
 })
 
 export const dependentsSchema = z.object({
@@ -88,8 +134,8 @@ export const marsSteps: WizardStepDef[] = [
   {
     id: 'step-2-blood-type',
     schema: bloodTypeSchema,
-    title: 'Blood Type Screening',
-    description: 'Mandatory universal-donor verification.',
+    title: 'Pre-flight Screening',
+    description: 'Universal-donor verification and seat assignment.',
   },
   {
     id: 'step-3-dependents',

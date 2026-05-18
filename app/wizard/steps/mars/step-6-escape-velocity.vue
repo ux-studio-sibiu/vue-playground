@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 import { escapeVelocitySchema } from '../../../../shared/wizard/steps/mars'
 import type { WizardFieldErrors } from '../../../../shared/wizard/types'
 import { useStepForm } from '../../composables/useStepForm'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   initialValues: Record<string, unknown>
   serverErrors?: WizardFieldErrors
+  isSubmitting: boolean
 }
 const props = defineProps<Props>()
-const emit = defineEmits<{ submit: [values: Record<string, unknown>] }>()
+const emit = defineEmits<{ submit: [values: Record<string, unknown>]; back: [] }>()
 
 const form = useStepForm(escapeVelocitySchema, () => props.initialValues, () => props.serverErrors)
 const [vel, attrs] = form.defineField('escapeVelocityKmS')
@@ -18,10 +22,16 @@ const onSubmit = form.handleSubmit((values) => emit('submit', values))
 
 <template>
   <form id="wizard-step-form" class="space-y-4" novalidate @submit="onSubmit">
-    <label class="block">
-      <span class="text-sm font-medium">Earth escape velocity (km/s)</span>
-      <input v-model.number="vel" v-bind="attrs" type="number" step="0.01" class="mt-1 w-full rounded border px-3 py-2" />
-      <p v-if="form.errors.value.escapeVelocityKmS" class="mt-1 text-sm text-destructive">{{ form.errors.value.escapeVelocityKmS }}</p>
-    </label>
+    <Field name="escapeVelocityKmS" :error="form.errors.value.escapeVelocityKmS">
+      <FieldLabel>Earth escape velocity (km/s)</FieldLabel>
+      <Input v-model.number="vel" v-bind="attrs" type="number" step="0.01" />
+      <FieldError />
+    </Field>
   </form>
+  <Teleport to="#wizard-footer-portal" defer>
+    <div class="flex gap-2 px-6 py-4">
+      <Button variant="btn-default" @click="$emit('back')">Back</Button>
+      <Button variant="btn-primary" form="wizard-step-form" type="submit">Next</Button>
+    </div>
+  </Teleport>
 </template>

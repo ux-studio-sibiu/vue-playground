@@ -7,15 +7,7 @@ definePageMeta({ layout: 'map' })
 const route = useRoute()
 const isDev = import.meta.dev
 
-const {
-  mapContainer,
-  zoomLevel,
-  geoWarning,
-  yearLegendItems,
-  isYearSort,
-  selectedBuilding,
-  closeBuilding,
-} = useMapPage()
+const { mapContainer, zoomLevel, geoWarning, yearLegendItems, isYearSort, selectedBuilding, closeBuilding } = useMapPage()
 </script>
 
 <template>

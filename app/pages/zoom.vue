@@ -37,6 +37,9 @@ const projects = [
 const zoomed = ref(false)
 const activeProject = ref<typeof projects[0] | null>(null)
 
+
+
+
 function waitForJQuery(): Promise<void> {
   return new Promise((resolve) => {
     const check = () => {
@@ -83,9 +86,12 @@ onMounted(async () => {
   const cards = $('.zoom-target').toArray() as HTMLElement[]
 
   function zoomToIdx(idx: number) {
+    const project = projects[idx]
+    if (!project || !cards[idx]) return
+
     currentIdx = idx
     zoomed.value = true
-    activeProject.value = projects[idx]
+    activeProject.value = project
     $('.zoom-target').removeClass('is-zoomed')
     $(cards[idx]).addClass('is-zoomed')
     showBtn()
@@ -116,7 +122,8 @@ onMounted(async () => {
       } else {
         randomPos = (randomPos - 1 + randomOrder.length) % randomOrder.length
       }
-      zoomToIdx(randomOrder[randomPos])
+      const randomIdx = randomOrder[randomPos]
+      if (randomIdx !== undefined) zoomToIdx(randomIdx)
     } else if (!zoomed.value) {
       // First scroll zooms into the first element
       zoomToIdx(0)
@@ -132,12 +139,30 @@ onMounted(async () => {
     zoomOut()
   })
 
+
+
+  function sendIframeEvent(data: string) {
+    window.parent.postMessage({ type: 'IFRAME_EVENT', data }, '*')
+  }
+  // Notify parent when hovering an item and clear when leaving container.
+  function handleTargetMouseEnter(this: HTMLElement) {
+    const image = this.querySelector('img') as HTMLImageElement | null
+    sendIframeEvent(image?.currentSrc || image?.src || '')
+  }
+
+  function handleContainerMouseLeave() {sendIframeEvent('')}
+
+  $('.zoom-target').on('mouseenter', handleTargetMouseEnter)
+  $('.zoom-container').on('mouseleave', handleContainerMouseLeave)
+
   // Esc key to zoom out
   window.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') zoomOut()
   })
 
   onUnmounted(() => {
+    $('.zoom-target').off('mouseenter', handleTargetMouseEnter)
+    $('.zoom-container').off('mouseleave', handleContainerMouseLeave)
     btn.remove()
   })
 })

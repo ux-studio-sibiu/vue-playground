@@ -2,7 +2,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
-import { marsSteps } from '../../shared/wizard/steps/mars'
+import { marsSteps } from '~~/shared/wizard/steps/mars'
 import WizardDialog from '~/wizard/components/wizard-dialog.vue'
 import { marsStepRegistry } from '~/wizard/steps/mars/registry'
 

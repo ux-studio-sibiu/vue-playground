@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
-import { familyDetailsSchema } from '../../../../shared/wizard/steps/mars'
-import type { WizardFieldErrors } from '../../../../shared/wizard/types'
+import { familyDetailsSchema } from '~~/shared/wizard/steps/mars'
+import type { WizardFieldErrors } from '~~/shared/wizard/types'
 import { useStepForm } from '../../composables/useStepForm'
 
 interface Props {

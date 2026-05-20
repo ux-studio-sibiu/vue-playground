@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { escapeVelocitySchema } from '../../../../shared/wizard/steps/mars'
-import type { WizardFieldErrors } from '../../../../shared/wizard/types'
+import { escapeVelocitySchema } from '~~/shared/wizard/steps/mars'
+import type { WizardFieldErrors } from '~~/shared/wizard/types'
 import { useStepForm } from '../../composables/useStepForm'
 import { Button } from '@/components/ui/button'
 

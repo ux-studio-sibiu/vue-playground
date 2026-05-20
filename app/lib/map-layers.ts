@@ -76,7 +76,15 @@ export const overlayLayers: LayerSpecification[] = [
     id: 'buildings-overlay-fill',
     type: 'fill',
     source: 'buildings-overlay',
-    paint: { 'fill-color': ['get', 'fillColor'], 'fill-opacity': 1 },
+    paint: {
+      'fill-color': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        '#3f3f3f',
+        ['get', 'fillColor'],
+      ],
+      'fill-opacity': 1,
+    },
   },
   {
     id: 'buildings-overlay-outline',

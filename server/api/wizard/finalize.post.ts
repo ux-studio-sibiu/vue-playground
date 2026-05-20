@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, setResponseStatus } from 'h3'
-import { replayAndValidate } from '../../../shared/wizard/engine'
-import { marsSteps } from '../../../shared/wizard/steps/mars'
-import type { FinalizeResponse, WizardHistoryEntry } from '../../../shared/wizard/types'
+import { replayAndValidate } from '~~/shared/wizard/engine'
+import { marsSteps } from '~~/shared/wizard/steps/mars'
+import type { FinalizeResponse, WizardHistoryEntry } from '~~/shared/wizard/types'
 
 /**
  * Whole-application replay + validation.

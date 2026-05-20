@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldError, FieldHint } from '@/components/ui/field'
-import { ALLOWED_SKILLS_LIST, skillsSchema } from '../../../../shared/wizard/steps/mars'
-import type { WizardFieldErrors } from '../../../../shared/wizard/types'
+import { ALLOWED_SKILLS_LIST, skillsSchema } from '~~/shared/wizard/steps/mars'
+import type { WizardFieldErrors } from '~~/shared/wizard/types'
 import { useStepForm } from '../../composables/useStepForm'
 import { Button } from '@/components/ui/button'
 

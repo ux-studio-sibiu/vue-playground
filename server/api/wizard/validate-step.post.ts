@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, setResponseStatus } from 'h3'
-import { findStepById, validateStep } from '../../../shared/wizard/engine'
-import { marsSteps } from '../../../shared/wizard/steps/mars'
-import type { StepValidationResponse } from '../../../shared/wizard/types'
+import { findStepById, validateStep } from '~~/shared/wizard/engine'
+import { marsSteps } from '~~/shared/wizard/steps/mars'
+import type { StepValidationResponse } from '~~/shared/wizard/types'
 
 /**
  * Per-step server-side validation.

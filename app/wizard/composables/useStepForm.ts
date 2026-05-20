@@ -2,7 +2,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { watch } from 'vue'
 import type { ZodTypeAny } from 'zod'
-import type { WizardFieldErrors } from '../../../shared/wizard/types'
+import type { WizardFieldErrors } from '~~/shared/wizard/types'
 
 /**
  * Per-step VeeValidate wrapper.

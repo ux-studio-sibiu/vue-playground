@@ -18,6 +18,12 @@ export default defineType({
       initialValue: '#e74c3c',
     }),
     defineField({
+      name: 'yearBuild',
+      title: 'Year Built',
+      type: 'number',
+      validation: (rule) => rule.integer().min(1000).max(new Date().getFullYear()),
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',

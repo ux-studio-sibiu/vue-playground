@@ -13,6 +13,7 @@ export default defineEventHandler(async () => {
   const buildings = await client.fetch(`*[_type == "building"]{
     title,
     fillColor,
+    yearBuild,
     "mainImage": mainImage.asset->url,
     "content": content[]{
       description,
@@ -30,6 +31,7 @@ export default defineEventHandler(async () => {
         properties: {
           name: b.title,
           fillColor: b.fillColor || '#e74c3c',
+          yearBuild: b.yearBuild,
           mainImage: b.mainImage || '',
           content: JSON.stringify(b.content || []),
         },

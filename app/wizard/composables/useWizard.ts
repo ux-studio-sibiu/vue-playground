@@ -1,6 +1,6 @@
 import { computed, ref, shallowRef } from 'vue'
-import { findNextStep, findStepById } from '../../../shared/wizard/engine'
-import type { FinalizeResponse, StepValidationResponse, WizardFieldErrors, WizardHistoryEntry, WizardStepDef, WizardStepMeta } from '../../../shared/wizard/types'
+import { findNextStep, findStepById } from '~~/shared/wizard/engine'
+import type { FinalizeResponse, StepValidationResponse, WizardFieldErrors, WizardHistoryEntry, WizardStepDef, WizardStepMeta } from '~~/shared/wizard/types'
 
 function toStepMeta(step: WizardStepDef | null): WizardStepMeta | null {
   if (!step) return null

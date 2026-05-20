@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
-import { dependentsSchema } from '../../../../shared/wizard/steps/mars'
-import type { WizardFieldErrors } from '../../../../shared/wizard/types'
+import { dependentsSchema } from '~~/shared/wizard/steps/mars'
+import type { WizardFieldErrors } from '~~/shared/wizard/types'
 import { useStepForm } from '../../composables/useStepForm'
 import { Button } from '@/components/ui/button'
 

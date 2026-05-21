@@ -71,6 +71,10 @@ onMounted(async () => {
   function showBtn() { btn.style.display = 'flex' }
   function hideBtn() { btn.style.display = 'none' }
 
+  function sendIframeEvent(data: string) {
+    window.parent.postMessage({ type: 'IFRAME_EVENT', data }, '*')
+  }
+
   function zoomOut() {
     if (!zoomed.value) return
     zoomed.value = false
@@ -78,6 +82,7 @@ onMounted(async () => {
     hideBtn()
     $('.zoom-target').removeClass('is-zoomed')
     $('.zoom-container').zoomTo({ targetsize: 1.0, duration: 500, easing: 'ease' })
+    sendIframeEvent('')
   }
 
   btn.addEventListener('click', (e) => { e.stopPropagation(); zoomOut() })
@@ -96,6 +101,7 @@ onMounted(async () => {
     $(cards[idx]).addClass('is-zoomed')
     showBtn()
     $(cards[idx]).zoomTo({ targetsize: 0.85, duration: 600, easing: 'ease' })
+    sendIframeEvent(cards[idx].dataset.srcKey || '')
   }
 
   // Click a card to zoom in (or switch to another card if already zoomed)
@@ -139,31 +145,12 @@ onMounted(async () => {
     zoomOut()
   })
 
-
-
-  function sendIframeEvent(data: string) {
-    window.parent.postMessage({ type: 'IFRAME_EVENT', data }, '*')
-  }
-  // Notify parent when hovering an item and clear when leaving container.
-  function handleTargetMouseEnter(this: HTMLElement) {
-    sendIframeEvent(this.dataset.srcKey || '')
-  }
-
-  function handleContainerMouseLeave() {
-    sendIframeEvent('')
-  }
-
-  $('.zoom-target').on('mouseenter', handleTargetMouseEnter)
-  $('.zoom-container').on('mouseleave', handleContainerMouseLeave)
-
   // Esc key to zoom out
   window.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') zoomOut()
   })
 
   onUnmounted(() => {
-    $('.zoom-target').off('mouseenter', handleTargetMouseEnter)
-    $('.zoom-container').off('mouseleave', handleContainerMouseLeave)
     btn.remove()
   })
 })
